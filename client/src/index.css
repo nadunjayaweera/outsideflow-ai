@@ -241,3 +241,18 @@ textarea:focus {
     padding: 20px;
   }
 }
+
+.error-message {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #fee2e2;
+  color: #b91c1c;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.generate-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}

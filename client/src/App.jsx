@@ -8,33 +8,43 @@ function App() {
   const [note, setNote] = useState("");
   const [plan, setPlan] = useState(null);
 
-  const handleGenerate = () => {
-    setPlan({
-      title: "30-Minute Outdoor Reset",
-      goal: "Relax and get some fresh air",
-      activities: [
-        {
-          step: 1,
-          activity: "Walk outside without headphones",
-          duration: "10 min",
+  const [loading, setLoading] = useState(false);
+
+  const [error, setError] = useState("");
+
+  const handleGenerate = async () => {
+    try {
+      setLoading(true);
+      setError("");
+      setPlan(null);
+
+      const response = await fetch("http://localhost:5000/api/generate-plan", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        {
-          step: 2,
-          activity: "Find and photograph 3 interesting plants",
-          duration: "10 min",
-        },
-        {
-          step: 3,
-          activity: "Sit somewhere quiet and observe your surroundings",
-          duration: "5 min",
-        },
-        {
-          step: 4,
-          activity: "Walk back using a different route",
-          duration: "5 min",
-        },
-      ],
-    });
+        body: JSON.stringify({
+          time,
+          mood,
+          environment,
+          note,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || "Failed to generate plan");
+      }
+
+      setPlan(data.plan);
+    } catch (err) {
+      console.error(err);
+
+      setError(err.message || "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -116,9 +126,17 @@ function App() {
             />
           </div>
 
-          <button className="generate-button" onClick={handleGenerate}>
-            Generate Outdoor Plan
+          <button
+            className="generate-button"
+            onClick={handleGenerate}
+            disabled={loading}
+          >
+            {loading
+              ? "Creating your outdoor plan..."
+              : "Generate Outdoor Plan"}
           </button>
+
+          {error && <div className="error-message">{error}</div>}
         </section>
 
         {plan && (
