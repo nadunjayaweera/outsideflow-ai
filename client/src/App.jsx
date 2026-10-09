@@ -7,9 +7,8 @@ function App() {
   const [environment, setEnvironment] = useState("Anywhere");
   const [note, setNote] = useState("");
   const [plan, setPlan] = useState(null);
-
+  const [sessionStarted, setSessionStarted] = useState(false);
   const [loading, setLoading] = useState(false);
-
   const [error, setError] = useState("");
 
   const handleGenerate = async () => {
@@ -47,12 +46,53 @@ function App() {
     }
   };
 
+  if (sessionStarted && plan) {
+    return (
+      <div className="session-screen">
+        <div className="session-card">
+          <span className="session-eyebrow">OUTDOOR SESSION READY</span>
+
+          <h1>{plan.title}</h1>
+
+          <p className="session-goal">{plan.goal}</p>
+
+          <div className="session-steps">
+            {plan.activities.map((item) => (
+              <div className="session-step" key={item.step}>
+                <span>{item.step}</span>
+
+                <div>
+                  <h3>{item.activity}</h3>
+                  <p>{item.duration}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="go-message">
+            <h2>Put your phone away and go 🌿</h2>
+
+            <p>Your plan is ready. The rest happens outside.</p>
+          </div>
+
+          <button
+            className="finish-button"
+            onClick={() => setSessionStarted(false)}
+          >
+            I&apos;m Back
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="app">
       <div className="container">
         <header className="header">
           <div>
             <h1>OutsideFlow AI</h1>
+
             <p>Spend less time planning. Spend more time outside.</p>
           </div>
 
@@ -64,6 +104,7 @@ function App() {
 
         <section className="planner-card">
           <h2>Create your outdoor plan</h2>
+
           <p className="subtext">
             Tell OutsideFlow what kind of break you want.
           </p>
@@ -154,13 +195,19 @@ function App() {
 
                   <div className="activity-content">
                     <h3>{item.activity}</h3>
+
                     <span>{item.duration}</span>
                   </div>
                 </div>
               ))}
             </div>
 
-            <button className="start-button">Start Outdoor Session</button>
+            <button
+              className="start-button"
+              onClick={() => setSessionStarted(true)}
+            >
+              Start Outdoor Session
+            </button>
 
             <p className="phone-away">Put your phone away and go 🌿</p>
           </section>

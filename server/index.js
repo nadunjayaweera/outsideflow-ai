@@ -101,7 +101,8 @@ Rules:
     const ollamaData = await ollamaResponse.json();
 
     const content = ollamaData.message?.content;
-
+    console.log("Gemma raw response:");
+    console.log(content);
     if (!content) {
       throw new Error("No response received from Gemma");
     }

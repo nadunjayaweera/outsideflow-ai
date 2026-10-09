@@ -256,3 +256,104 @@ textarea:focus {
   opacity: 0.55;
   cursor: not-allowed;
 }
+
+.session-screen {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: #edf5eb;
+}
+
+.session-card {
+  width: min(700px, 100%);
+  background: white;
+  border: 1px solid #d7e4d3;
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.05);
+}
+
+.session-eyebrow {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+  color: #166534;
+}
+
+.session-card h1 {
+  margin: 0 0 10px;
+}
+
+.session-goal {
+  color: #6b7280;
+  margin-bottom: 28px;
+}
+
+.session-steps {
+  display: grid;
+  gap: 12px;
+}
+
+.session-step {
+  display: flex;
+  gap: 14px;
+  padding: 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+}
+
+.session-step > span {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #dcfce7;
+  color: #166534;
+  font-weight: 800;
+}
+
+.session-step h3 {
+  margin: 0 0 4px;
+  font-size: 15px;
+}
+
+.session-step p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.go-message {
+  margin-top: 28px;
+  padding: 22px;
+  text-align: center;
+  background: #f0fdf4;
+  border-radius: 16px;
+}
+
+.go-message h2 {
+  margin: 0 0 8px;
+  color: #166534;
+}
+
+.go-message p {
+  margin: 0;
+  color: #64748b;
+}
+
+.finish-button {
+  margin-top: 18px;
+  width: 100%;
+  border: none;
+  border-radius: 14px;
+  padding: 14px;
+  background: #1f2937;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
